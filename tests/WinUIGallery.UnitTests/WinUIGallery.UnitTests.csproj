@@ -37,12 +37,20 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="$(WindowsAppSdkPackageVersion)" />
+        <PackageReference Include="Microsoft.WindowsAppSDK" />
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="$(MicrosoftWindowsSDKBuildToolsNugetPackageVersion)" />
         <PackageReference Include="MSTest.TestAdapter" Version="3.1.1" />
         <PackageReference Include="MSTest.TestFramework" Version="3.1.1" />
         <PackageReference Include="Microsoft.TestPlatform.TestHost" Version="17.7.2" ExcludeAssets="build" />
         <Manifest Include="$(ApplicationManifest)" />
+    </ItemGroup>
+
+    <!-- Outside the WinUI repo, pin to the explicit WASDK version from CPM.
+         Inside the repo, the mock-binding infrastructure resolves Microsoft.WindowsAppSDK
+         from packagestore -- pinning a Version here would race the mock generator
+         and produce NU1102 (asks for a version string the mock generator didn't emit). -->
+    <ItemGroup Condition="'$(IsInWinUIRepo)' != 'true'">
+        <PackageReference Update="Microsoft.WindowsAppSDK" Version="$(WindowsAppSdkPackageVersion)" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
