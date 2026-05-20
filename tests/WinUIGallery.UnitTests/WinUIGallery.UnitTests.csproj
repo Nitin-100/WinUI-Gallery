@@ -45,10 +45,8 @@
         <Manifest Include="$(ApplicationManifest)" />
     </ItemGroup>
 
-    <!-- Outside the WinUI repo, pin to the explicit WASDK version from CPM.
-         Inside the repo, the mock-binding infrastructure resolves Microsoft.WindowsAppSDK
-         from packagestore -- pinning a Version here would race the mock generator
-         and produce NU1102 (asks for a version string the mock generator didn't emit). -->
+    <!-- Inside the WinUI repo, mock-binding infrastructure resolves Microsoft.WindowsAppSDK from packagestore;
+         pinning a Version here races the mock generator and produces NU1102. Outside the repo, pin from CPM. -->
     <ItemGroup Condition="'$(IsInWinUIRepo)' != 'true'">
         <PackageReference Update="Microsoft.WindowsAppSDK" Version="$(WindowsAppSdkPackageVersion)" />
     </ItemGroup>
