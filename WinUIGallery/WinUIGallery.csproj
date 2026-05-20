@@ -143,7 +143,16 @@
     <PackageReference Include="System.Private.Uri" />
 	<ProjectReference Include="..\WinUIGallery.SourceGenerator\WinUIGallery.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
-	
+
+  <!-- When building inside the WinUI repo, override the Win2D version from CPM to avoid
+       transitive dependency on Microsoft.WindowsAppSDK.WinUI which conflicts with the mock package.
+       Workaround restored from pre-PR#2107 behavior; ado-winui's MUXControls.sln restore
+       enumerates this csproj and the un-overridden Win2D 1.4.0 transitively demands
+       Microsoft.WindowsAppSDK at the 999.0.0-mock-* version that isn't produced until later. -->
+  <ItemGroup Condition="'$(IsInWinUIRepo)' == 'true'">
+    <PackageReference Update="Microsoft.Graphics.Win2D" VersionOverride="$(GraphicsWin2DVersion)" />
+  </ItemGroup>
+
   <ItemGroup Condition="'$(IsInWinUIRepo)' != 'true'">
     <PackageReference Update="Microsoft.WindowsAppSDK" Version="$(WindowsAppSdkPackageVersion)" />
     <PackageReference Remove="ColorCode.Core" />
