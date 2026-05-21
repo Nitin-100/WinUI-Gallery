@@ -222,7 +222,7 @@ namespace WinUIGallery.ControlPages
             {
                 var picker = new FileSavePicker();
                 // Get the window handle for the picker
-                var window = App.StartupWindow;
+                var window = App.MainWindow;
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
                 WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
@@ -256,7 +256,7 @@ namespace WinUIGallery.ControlPages
             try
             {
                 var picker = new FileOpenPicker();
-                var window = App.StartupWindow;
+                var window = App.MainWindow;
                 var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
                 WinRT.Interop.InitializeWithWindow.Initialize(picker, hwnd);
 
