@@ -7,7 +7,7 @@ using System;
 
 namespace WinUIGallery.Converters;
 
-partial class DoubleToThicknessConverter : IValueConverter
+public partial class DoubleToThicknessConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, string language)
     {
