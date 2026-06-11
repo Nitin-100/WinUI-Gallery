@@ -25,10 +25,6 @@
                         "description": "Indicates that this section is not a regular control section but is added to the navigation differently",
                         "default": true
                     },
-                    "Folder": {
-                        "type": "string",
-                        "description": "Use to indicate a special child item for this folder. Only used when IsSpecialSection is true"
-                    },
                     "Items": {
                         "type": "array",
                         "description": "Individual control info",
@@ -94,6 +90,13 @@
                                         "type": "string"
                                     },
                                     "description": "UniqueIds of other controls that are conceptually related to this one. Used to surface 'Related controls' suggestions on the control's detail page."
+                                },
+                                "Tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "Additional keywords used purely for search. If a search query matches one of these tags, this sample will be surfaced in the results even when the tag does not appear in the Title."
                                 },
                             },
                             "required": [ "UniqueId", "Title"]

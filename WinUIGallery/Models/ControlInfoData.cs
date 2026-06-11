@@ -32,6 +32,7 @@ public partial class ControlInfoDataItem
     public string UniqueId { get; set; } = string.Empty;
     public string Title { get; set; } = string.Empty;
     public string[] BaseClasses { get; set; } = [];
+    public string[] Tags { get; set; } = [];
     public string ApiNamespace { get; set; } = string.Empty;
     public string Subtitle { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
@@ -69,7 +70,6 @@ public partial class ControlInfoDataGroup
     public string Title { get; set; } = string.Empty;
     public string IconGlyph { get; set; } = string.Empty;
     public bool IsSpecialSection { get; set; }
-    public string Folder { get; set; } = string.Empty;
     public ObservableCollection<ControlInfoDataItem> Items { get; set; } = [];
 
     public override string ToString()
